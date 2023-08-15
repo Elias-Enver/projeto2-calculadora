@@ -13,7 +13,6 @@ form.addEventListener('submit',(e)=>{
     e.preventDefault()
 
     adicionalinha()
-    atualizatabela()
     atualizaMedia()
    
 })
@@ -21,12 +20,14 @@ form.addEventListener('submit',(e)=>{
 function adicionalinha(){
     const inputnomeatividade = document.getElementById('nome-atividade')
     const inputnotaatividade = document.getElementById('nota-atividade')
-    console.log(atividades)
-    corpotabela.innerHTML=""
+    
 
     if(atividades.includes(inputnomeatividade.value)){
         alert(`A atividade:${inputnomeatividade.value} já foi inserida`)
+        inputnomeatividade.value = ""
+        inputnotaatividade.value=""
     }else{
+        console.log(`atividades`)
         atividades.push(inputnomeatividade.value)
         notas.push(parseFloat(inputnotaatividade.value))
         linha = '<tr>'
@@ -34,6 +35,7 @@ function adicionalinha(){
         linha += `<td>${inputnotaatividade.value} </td>`
         linha += `<td>${inputnotaatividade.value>=notaMinima?imgaprovado:imgreprovado}</td>`
         linha += `</tr>`
+        corpotabela.innerHTML += linha
     }
 
 
@@ -43,10 +45,7 @@ function adicionalinha(){
 
 }
 
-function atualizatabela(){
-    
-    corpotabela.innerHTML += linha
-}
+
 
 function atualizaMedia(){
     const mediafinal=calculamediafinal()
